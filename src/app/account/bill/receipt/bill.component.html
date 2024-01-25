@@ -1,0 +1,692 @@
+<div class="" *ngIf="data">
+  <div class="h-100 p-3 m-auto page-body" style="max-width: 28rem; margin-end: auto; margin-start: auto;">
+    <div id="billScroll" class="h-100 m-0 scroll-y">
+      <div id="canvases" class="h-100 m-0 scroll-y white-bg animate-box-down"  class="row  bg-white">
+        <div *ngFor="let temp of template" [ngClass]="getclass(temp)" >
+            <div *ngIf="temp.type==1" [id]="temp.id">
+              <ng-container *ngTemplateOutlet="this[temp.id]; context:{temp:temp}" class="mb-3" ></ng-container>
+            </div>
+            <div *ngIf="temp.type==2" [ngClass]="getalignment(temp)">
+              <div  [ngClass]="temp.bold==1?'':'fw-bold  '" class="font-size-12">{{temp.label}} &nbsp;</div>
+            </div>
+        </div>
+       
+        <div class="col-md-12 bg-white mb-3 animate-box-up">
+          <div class="gotham-medium">
+            <button class="btn btn-block btn-primary w-100" (click)="download()">Download Invoice</button>
+          </div>
+          <div class="text-center m-3 gotham-light">
+            <div>- Or Send invoice to your email -</div>
+          </div>
+          <div>
+            <form (ngSubmit)="typeSubmit()" [formGroup]="myForm" class="form-inline row">
+              <div class="form-group" style="width: calc(100% - 6rem);">
+                <input type="text" formControlName="email" placeholder="Please enter your email address here" class="form-control w-100">
+              </div>
+              <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary gotham-medium" style="width: 5.2rem;">Send</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12 bg-white mb-3 animate-box-up"> 
+          <div class="mb-2 text-center">Please Share your valuable feedback with us. </div>
+          <div class="gotham-medium">
+            <div class="text-muted font-size-20 text-center">
+              <span class="bx  me-2" role="button" *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" [ngClass]="i < selectedStars?'bxs-star text-warning':'bx-star text-secondary'"></span>
+              <!-- <span role="button" class="bx  me-2" [ngClass]="rating>0"></span>
+              <span role="button" class="bx bxs-star text-warning me-2"></span>
+              <span role="button" class="bx bxs-star text-warning me-2"></span>
+              <span role="button" class="bx bxs-star text-warning me-2"></span>
+              <span role="button" class="bx bx-star text-secondary"></span>    -->
+            </div>
+          </div> 
+          <form  class="form-inline row">
+            <div class="form-group " style="width: calc(100% - 6rem);">
+              <input type="text" name="feedback" placeholder="Please enter your feedback here." [(ngModel)]="feedback"  class="form-control  ">
+            </div>
+            <button type="submit" [disabled]="feedback==''?true:false" class="btn btn-primary gotham-medium" style="width: 5.2rem;">Send</button>
+          </form>
+      </div>
+               <!-- <div class="col-md-12  bg-white mb-3 animate-box-up" *ngIf="data.rating">            <div class=" gotham-medium">              {{data.rating}}            </div>            <div class="text-center mt-2 mb-4">              <button class="btn  me-1" [ngClass]="" [ngClass]=" x<=rating?'btn-primary':'btn-light'" (click)="rate(x)" *ngFor="let x of [0,1,2,3,4,5,6,7,8,9,10]">{{x}}</button>            </div>            <div class="mb-2">              Select single most important reason for your Rating            </div>            <div class="text-center mb-4 row justify-content-center">              <div class="col-md-4 py-2" *ngFor="let x of rating_reason">                <button class="btn btn-block" [ngClass]="reason==x.r_id?'btn-primary':'btn-light'" (click)="reasoning(x.r_id)" >{{x.reason}}</button>              </div>            </div>            <div class="mt-1 mb-2" *ngFor="let x of question">              {{x.question}}              <div style="font-size: 24px;">                <i class="bx me-4"   (click)="setlikes(x.q_id,1)" [ngClass]="getClass(x.q_id)==1?'text-success bxs-like':'bx-like'"></i>                <i class="bx " [ngClass]="getClass(x.q_id)==0?'text-danger bxs-dislike':'bx-dislike'" (click)="setlikes(x.q_id,0)"></i>              </div>            </div>            <div class="gotham-medium">              <button class="btn btn-block btn-primary " [disabled]="rating && reason ?false:true" (click)="submitfeedback()">Submit</button>              </div>            </div> -->          <!--<div class="col-md-12  bg-white mb-3 animate-box-up">            <div class="">            <button class="btn btn-primary w-100 p-3 gotham-medium">            <span class="text-white">View your previous transactions with us</span>            <span>            <i class="fas float-end fa-angle-end" style="font-size: 1.4rem;"></i>            </span>            </button>            </div>            <div class="text-center container gotham-book mt-4  animate-box-up" style="font-size: 0.70rem; color: #606060;">            <div class="mb-1">            <div>We hope you have enjoyed your shopping</div>            </div>            </div>            <div class="text-center container gotham-book  mb-4 animate-box-up" style="font-size: 0.70rem; color: #606060;">            <div>-->            <!-- <div>Corporate Address</div>            <div> LuLu Group International Headquarters <br> P.O. Box : 4048 Abu Dhabi UAE </div> -->            <!--</div>            </div>                    </div>-->                                 </div>    </div>  </div></div>
+        <ng-template let-temp="temp" #logo class="mb-3">
+          <div class="" [ngClass]="getalignment(temp)">
+            <a [href]="data.site" target="_blank" *ngIf="data.site">
+              <img class="amiation-opacity ng-star-inserted" id="logo" style="max-width: 11rem; max-height: 5rem;" [src]="data.logo">
+            </a>
+            <span *ngIf="!data.site">
+              <img class="amiation-opacity ng-star-inserted" id="logo" style="max-width: 11rem; max-height: 5rem;" [src]="data.logo">
+            </span>
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #address>
+          <!-- gotham-light pb-3 animate-box-up -->
+          <div class=" font-size-12" [ngClass]="getalignment(temp)" >
+            <div class="row">
+              <!-- <div class="col-auto" style="width: 2rem; padding-end: 0rem;">
+                <i class="mdi mdi-map-marker"></i>
+              </div> -->
+              <!-- style="width: calc(100% - 2rem);" -->
+              <div class="col-md-12">
+                <div *ngIf="data.address">{{data.address}}</div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #name>
+          <div class="fw-bold font-size-14" [ngClass]="getalignment(temp)" *ngIf="data.name" >{{data.name}}</div>
+        </ng-template>
+        <ng-template let-temp="temp" #trn>
+          <div class=" " style="margin-bottom: 1rem; " [ngClass]="getalignment(temp)" *ngIf="data.TRN_Number" style="font-size: 0.72rem;">TRN: {{data.TRN_Number}}</div>
+        </ng-template>
+        <ng-template let-temp="temp" #phone>
+          <div class=" " [ngClass]="getalignment(temp)" style="font-size: 0.72rem;" *ngIf="data.phone">
+            <i class="mdi mdi-phone me-2"></i>{{data.phone}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #date>
+          <div class=" " [ngClass]="getalignment(temp)" style="font-size: 0.72rem;" *ngIf="data.created_date">
+            {{data.created_date | date:'medium'}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #headline>
+          <div class=" gotham-light" *ngIf="data.headline" [ngClass]="getalignment(temp)">{{data.headline}}</div>
+        </ng-template>
+        <ng-template let-temp="temp" #greetings>
+          <div class=" gotham-medium" [ngClass]="getalignment(temp)" style="font-size: 1.15rem;">
+            <span>Dear Customer </span>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #item_count>
+          <div class="gotham-medium mb-2" [ngClass]="getalignment(temp)">
+            <div *ngIf="count"><span class="align-text-bottom">Items {{count}} </span></div>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #invoice>
+          <div class=" container animate-box-up grey-bg p-2" [ngClass]="getalignment(temp)" *ngIf="data.Tax_Invoice">
+            <span class="gotham-medium fw-bold">TAX INVOICE فاتورة ضريبية</span>
+            <div class="gotham-light">#{{data.Tax_Invoice}}</div>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #product>
+          <div class=" gotham-book animate-box-up" [ngClass]="getalignment(temp)">
+            <div class="overflow-hidden" style="max-height: 100%;">
+              <div style="font-size: 0.85rem;">
+                <div>
+                  <div *ngFor="let product of productdetails(data.Product_Details); let i=index" class="py-1 border-bottom ">
+                    <span [ngClass]="(i==0 || (i>0 && view==2))?'':'view'">
+                      <div class="row">
+                        <div class="col-1" style="padding-end: 0px;">{{i+1}}.</div>
+                        <div class="col-8" style="padding: 0px;">
+                          <div> {{product.name}} </div>
+                          <div> {{product.name_ar}}</div>
+                        </div>
+                        <div class="col-3 ps-0 text-end">{{product.amount}} </div>
+                      </div>
+                      <div class="gotham-light row mt-1" style="font-size: 0.72rem;">
+                        <div class="col-1 ps-0"> </div>
+                        <div class="text-nowrap col-auto ps-0" *ngIf="product.code"> Code : <span> </span>{{product.code}} </div>
+                        <div class="text-nowrap col-auto ps-0" *ngIf="product.quantity">Quantity : {{product.quantity}} </div>
+                      </div>
+                      <div class="gotham-light row mt-1" style="font-size: 0.72rem;">
+                        <div class="col-1 ps-0"> </div>
+                      </div>
+                      <div class="row" *ngIf="product.discount">
+                        <div class="col-1" style="padding-end: 0px;"> </div>
+                        <div class="col-5" style="padding: 0px;">Discount</div>
+                        <div class="col-6 text-end">- {{product.discount }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-1" style="padding-end: 0px;"> </div>
+                        <div class="col-5" style="padding: 0px;">Net amount</div>
+                        <div class="col-6 text-end gotham-medium">{{product.total }}</div>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="py-1" style="font-size: 0.85rem;">
+                <div class="text-center pointer" *ngIf="view==1 && count>1" (click)="changeview(2)">
+                  <i class="fas animated bounce fa-angle-down" style="font-size: 0.85rem;"></i>
+                </div>
+                <div class="text-center pointer" *ngIf="view==2 && count>1" (click)="changeview(1)">
+                  <i class="fas animated bounce fa-angle-up" style="font-size: 0.85rem;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template let-temp="temp" #Total_Discount>
+          <div [ngClass]="getalignment(temp)">
+            <div class="row" style="font-size: 0.85rem;" *ngIf="data.Total_Discount">
+              <div class="col-1" style="padding-end: 0px;"> </div>
+              <div class="col-7" style="padding-start: 0px;">Total Discount</div>
+              <div class="col-4 text-end">
+                <span class="gotham-medium">{{data.Total_Discount }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Receipt_No>
+          <div *ngIf="data.Receipt_No" style="font-size: 0.72rem;" [ngClass]="getalignment(temp)">
+            Receipt Number: {{data.Receipt_No}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Store_Code>
+          <div *ngIf="data.Store_Code" [ngClass]="getalignment(temp)">
+            Store Code: {{data.Store_Code}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Cashier>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.Cashier">
+            Cashier / Sales Person: {{vfi.Cashier}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Serial_number>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.Serial_number">
+            Serial Number: {{vfi.Serial_number}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Customer_ID>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.Customer_ID">
+            Customer ID: {{vfi.Customer_ID}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #Customer_Name>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.Customer_Name">
+            Customer Name: {{vfi.Customer_Name}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #tax>
+          <div [ngClass]="getalignment(temp)">
+            <div class="">
+              <div class="row mb-2 mt-2" *ngIf="data.Sub_Total" style="font-size: 0.85rem;">
+                <div class="col-1" style="padding-end: 0px;">
+                </div>
+                <div class="col-7 ps-0" >Subtotal (without tax)</div>
+                <div class="col-4 text-end">
+                  <span class="gotham-medium">{{data.Sub_Total }}</span>
+                </div>
+              </div>
+              <div>
+                <div class="grey-bg" *ngIf="data.Tax_Details">
+                  <div class="row gotham-medium pt-2" style="font-size: 0.85rem;">
+                    <div class="col-1" style="padding-end: 0px;">
+                    </div>
+                    <div class="col-11 ps-0" >Tax Summary</div>
+                 
+                    <div class="col-12 ">
+                      <table class="table table-borderless table-sm grey-bg" style="background-color: gray !important;">
+                        <thead>
+                          <tr>
+                            <th class="text-center">VAT%</th>
+                            <th class="text-center">Before VAT</th>
+                            <th class="text-center">Incl VAT</th>
+                            <th class="text-center">VAT</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-center">{{productdetails(data.Tax_Details).vat_per}} % </td>
+                            <td class="text-center">{{productdetails(data.Tax_Details).before_vat  }} </td>
+                            <td class="text-center">{{productdetails(data.Tax_Details).incl_vat  }} </td>
+                            <td class="text-center">{{productdetails(data.Tax_Details).vat  }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2 mt-2" *ngIf="data.Total" style="font-size: 0.85rem;">
+                  <div class="col-1" style="padding-end: 0px;">
+                  </div>
+                  <div class="col-7 ps-0">Total Amount Paid</div>
+                  <div class="col-4 text-end ">
+                    <span class="gotham-medium">{{vfi.VFI_PYCCurr}} {{data.Total  }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp"#amount></ng-template><!-- <ng-template let-temp="temp"#card>  <div class="pb-3 animate-box-up" [ngClass]="getalignment(temp)"> -->    <!-- <div class="row gotham-medium " style="font-size: 0.85rem;">      <div class="col-8 ">Tender</div>    </div> -->      <!-- <div class="mt-1"  style="font-size: 0.85rem;"> -->      <!-- <div class="row"> -->      <!-- <div class="col-5" style="padding-end: 0px;">{{data.Card_Scheme}} </div> -->      <!-- <div class="col-3 text-center" style="padding-start: 0px;"> {{data.currency}}</div>      <div class="col-4 text-end">      <span class="gotham-medium">{{data.Total}}</span>      </div> -->      <!-- </div> -->      <!-- <div class="row">      <div class="col-4 ps-4">Auth</div>      <div class="col-8 text-end">{{data.Auth}}</div>      </div> -->      <!-- <div class="row">      <div class="col-4 ps-4">Card No</div>      <div class="col-8 text-end">{{data.Card_Number}}</div>      </div> -->      <!-- <div class="row"> -->      <!-- <div class="col-4 ps-4">EFT Trans No</div>      <div class="col-8 text-end">{{data.EFT_Trans_Number}}</div>      </div> -->      <!-- </div>      <div class="row" style="font-size: 0.85rem;">      <div class="col ">      </div>      </div>      <div class="row " style="font-size: 0.85rem;"> -->      <!-- <div class="col ">Served By: Cres Lingat Aquino </div> -->      <!-- </div>  </div> -->    <!-- </ng-template> -->
+        <ng-template let-temp="temp" #mode>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_Mode_of_Payment">
+            {{vfi.VFI_Mode_of_Payment}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #order_type>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_Order_Type">
+            {{vfi.VFI_Order_Type}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #batch>
+          <div [ngClass]="getalignment(temp)" class="text-secondary font-size-10" *ngIf="vfi.VFI_Batch">
+            BATCH: {{vfi.VFI_Batch}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #app_ver>
+          <div [ngClass]="getalignment(temp)" class="font-size-10 text-secondary" *ngIf="vfi.VFI_AppVersion">
+            APPL VERS: {{vfi.VFI_AppVersion}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_TID>
+          <div [ngClass]="getalignment(temp)" class="font-size-10 text-secondary" *ngIf="vfi.VFI_TID">
+            Terminal ID: {{vfi.VFI_TID}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_POSID>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_POSID">
+            POS ID: {{vfi.VFI_POSID}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_MID>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_MID">
+            MID: {{vfi.VFI_MID}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_TxnType>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_TxnType">
+            {{vfi.VFI_TxnType}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CardScheme>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_CardSchemeName">
+            {{vfi.VFI_CardSchemeName}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CardNum>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_CardNum">
+            {{vfi.VFI_CardNum}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #expiry>
+          <div [ngClass]="getalignment(temp)" class="font-size-14 fw-bold" *ngIf="vfi.VFI_Expiry">
+            {{vfi.VFI_Expiry}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #pan>
+          <div [ngClass]="getalignment(temp)" class="font-size-12 text-secondary" *ngIf="vfi.VFI_PANSEQ">
+            PAN SEQ NO: {{vfi.VFI_PANSEQ}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_RRN>
+          <div [ngClass]="getalignment(temp)" class="font-size-12 text-secondary" *ngIf="vfi.VFI_RRN">
+            HOST REF NO: {{vfi.VFI_RRN}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #base>
+          <div class="row" [ngClass]="getalignment(temp)" class="font-size-12 text-secondary" *ngIf="vfi.VFI_Base">
+            <p class="col-md-6 text-start">BASE</p>
+            <p class="col-md-6 text-end">AED {{vfi.VFI_Base}}</p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #tip>
+          <div class="row" [ngClass]="getalignment(temp)" class="font-size-12 text-secondary" *ngIf="vfi.VFI_Tip">
+            <p class="col-md-6 text-start">TIP</p>
+            <p class="col-md-6 text-end">AED {{vfi.VFI_Tip}}</p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #dcc>
+          <div [ngClass]="getalignment(temp)" class="font-size-10 text-secondary">
+            {{vfi.VFI_DCC_Msg}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #PYCCurrAmount>
+          <div *ngIf="vfi.VFI_PYCAmount" [ngClass]="getalignment(temp)" class="font-size-14 fw-bold">
+            <div>TOTAL AMOUNT: <span>{{vfi.VFI_PYCCurr }} {{vfi.VFI_PYCAmount}}</span></div>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #disclaimer>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_Disclaimer" class="font-size-10 text-secondary">
+            {{vfi.VFI_Disclaimer}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #signature>
+          <div [ngClass]="getalignment(temp)">
+            <img class="amiation-opacity ng-star-inserted" style="max-width: 11rem; max-height: 5rem;" [src]="vfi.Signature">
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #approval>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ApprovalCode" class="font-size-14 fw-bold">
+            APPROVAL CODE {{vfi.VFI_ApprovalCode}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #aid>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_AID" class="font-size-11 fw-bold ">
+            AID: {{vfi.VFI_AID}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #app>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_EmvLabel" class="font-size-11 fw-bold">
+            APP NAME: {{vfi.VFI_EmvLabel}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #pre>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_EmvPName" class="font-size-11 fw-bold">
+            PRE.NAME: {{vfi.VFI_EmvPName}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #tvr>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_TVR" class="font-size-11 fw-bold">
+            TVR: {{vfi.VFI_TVR}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #tsi>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_TSI" class="font-size-11 fw-bold">
+            TSI: {{vfi.VFI_TSI}}
+          </div>
+        </ng-template><ng-template let-temp="temp" #info>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_AC" class="font-size-11 fw-bold">
+            AC : {{vfi.VFI_AC}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #ac>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ACID" class="font-size-11 fw-bold">
+            AC INFO : {{vfi.VFI_ACID}}
+          </div>
+        </ng-template>
+
+        <ng-template let-temp="temp" #VFI_TransType>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_TransType" class="font-size-11 fw-bold">
+            Transaction Type : {{vfi.VFI_TransType==1?'Sale':vfi.VFI_TransType==11?'Redemption':'CUP QR'}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CHName>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CHName" class="font-size-11 fw-bold">
+            Card Holder : {{vfi.VFI_CHName}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_MessNum>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_MessNum" class="font-size-11 fw-bold">
+            MessNum : {{vfi.VFI_MessNum}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_TransSource>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_TransSource" class="font-size-11 fw-bold">
+            Transaction Source : {{vfi.VFI_TransSource==1?'Manual':''}}{{vfi.VFI_TransSource==2?'Swipe':''}}{{vfi.VFI_TransSource==3?'ICC Chip':''}}{{vfi.VFI_TransSource==4?'FALLBACK':''}}{{vfi.VFI_TransSource==5?'CTLS/NFC':''}}{{vfi.VFI_TransSource==6?'QR TXN':''}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_AuthMode>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_AuthMode" class="font-size-11 fw-bold">
+            Auth Mode : {{vfi.VFI_AuthMode==1?'Online':'Offline'}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CHVerification>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CHVerification" class="font-size-11 fw-bold">
+            Card Holder verification : {{vfi.VFI_CHVerification==1?'Signature':''}}{{vfi.VFI_CHVerification==2?'PIN':''}}{{vfi.VFI_CHVerification==3?'Offline EMV PIN':''}}{{vfi.VFI_CHVerification==4?'CDCVM':''}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_RespCode>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_RespCode" class="font-size-11 fw-bold">
+            Response Code : {{vfi.VFI_RespCode}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_RespMess>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_RespMess" class="font-size-11 fw-bold">
+            Response Message : {{vfi.VFI_RespMess}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_RespMess>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_RespMess" class="font-size-11 fw-bold">
+            Response Message : {{vfi.VFI_RespMess}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_RespMess>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_RespMess" class="font-size-11 fw-bold">
+            Response Message : {{vfi.VFI_RespMess}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_DBCount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_DBCount" class="font-size-11 fw-bold">
+            DB Count : {{vfi.VFI_DBCount}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CRCount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CRCount" class="font-size-11 fw-bold">
+            CR Count : {{vfi.VFI_CRCount}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_DBAmount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_DBAmount" class="font-size-11 fw-bold">
+            DB Amount : {{vfi.VFI_DBAmount}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CRAmount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CRAmount" class="font-size-11 fw-bold">
+            CR Amount : {{vfi.VFI_CRAmount}}
+          </div>
+        </ng-template>
+
+        <ng-template let-temp="temp" #VFI_AdditionalInfo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_AdditionalInfo" class="font-size-11 fw-bold">
+            Additional Info : {{vfi.VFI_AdditionalInfo}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_ReportType>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ReportType" class="font-size-11 fw-bold">
+           Report Type : {{vfi.VFI_ReportType==1?'Summary':''}}{{vfi.VFI_ReportType==2?'Detail':''}}{{vfi.VFI_ReportType==3?'User Wise':''}}{{vfi.VFI_ReportType==4?'User':''}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_ExchRate>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ExchRate" class="font-size-11 fw-bold">
+          Exchange rate : {{vfi.VFI_ExchRate}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_MarkUp>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_MarkUp" class="font-size-11 fw-bold">
+          Markup : {{vfi.VFI_MarkUp}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_PYCCurrName>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_PYCCurrName" class="font-size-11 fw-bold">
+          Currency : {{vfi.VFI_PYCCurrName}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_OptinOut>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_OptinOut" class="font-size-11 fw-bold">
+          OptinOut : {{vfi.VFI_OptinOut==0?'Opted In':'Opted Out'}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_QPSVeps>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_QPSVeps" class="font-size-11 fw-bold">
+          OptinOut : {{vfi.VFI_QPSVeps==3?'Veps':''}}{{vfi.VFI_QPSVeps==4?'Qps':''}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_CashAmount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CashAmount" class="font-size-11 fw-bold">
+          Cash Amount : {{vfi.VFI_CashAmount}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_Epp_Tenor>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_Epp_Tenor" class="font-size-11 fw-bold">
+          EPP Tenor : {{vfi.VFI_Epp_Tenor}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_Epp_Invoice>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_Epp_Invoice" class="font-size-11 fw-bold">
+            EPP Invoice : {{vfi.VFI_Epp_Invoice}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_Surcharge>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_Surcharge" class="font-size-11 fw-bold">
+            Surcharge : {{vfi.VFI_Surcharge}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_VoucherNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_VoucherNo" class="font-size-11 fw-bold">
+            Voucher No : {{vfi.VFI_VoucherNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_CouponMessage>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CouponMessage" class="font-size-11 fw-bold">
+            Coupon Message : {{vfi.VFI_CouponMessage}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_CouponCode>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_CouponCode" class="font-size-11 fw-bold">
+            Coupon Code : {{vfi.VFI_CouponCode}}
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #VFI_QRVoucherNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_QRVoucherNo" class="font-size-11 fw-bold">
+            QR Voucher No : {{vfi.VFI_QRVoucherNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_VASRefId>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_VASRefId" class="font-size-11 fw-bold">
+            VAS Reference Id : {{vfi.VFI_VASRefId}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_PaybyMerchantOrderNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_PaybyMerchantOrderNo" class="font-size-11 fw-bold">
+            Pay by Merchant Order No : {{vfi.VFI_PaybyMerchantOrderNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_PaybyOrderNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_PaybyOrderNo" class="font-size-11 fw-bold">
+            Pay by Order No : {{vfi.VFI_PaybyOrderNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_MerchantOrderNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_MerchantOrderNo" class="font-size-11 fw-bold">
+            Merchant Order No : {{vfi.VFI_MerchantOrderNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_AliPayOrderNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_AliPayOrderNo" class="font-size-11 fw-bold">
+            AliPay Order No : {{vfi.VFI_AliPayOrderNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_MerRefNo>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_MerRefNo" class="font-size-11 fw-bold">
+            Merchant Reference No : {{vfi.VFI_MerRefNo}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ServiceId>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ServiceId" class="font-size-11 fw-bold">
+            Service ID : {{vfi.VFI_ServiceId}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ServiceType>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ServiceType" class="font-size-11 fw-bold">
+            Service Type : {{vfi.VFI_ServiceType}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ServiceCount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ServiceCount" class="font-size-11 fw-bold">
+            Service Count : {{vfi.VFI_ServiceCount}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ServiceData>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ServiceData" class="font-size-11 fw-bold">
+            Service Data : {{vfi.VFI_ServiceData}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ServiceAmount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ServiceAmount" class="font-size-11 fw-bold">
+            Service Amount : {{vfi.VFI_ServiceAmount}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_VatAmount>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_VatAmount" class="font-size-11 fw-bold">
+            VAT Amount : {{vfi.VFI_VatAmount}}
+          </div>
+        </ng-template>
+        
+        <ng-template let-temp="temp" #VFI_ConfirmationCode>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_ConfirmationCode" class="font-size-11 fw-bold">
+            Confirmation Code : {{vfi.VFI_ConfirmationCode==1?'YES':'NO'}}
+          </div>
+        </ng-template>
+       
+        <ng-template let-temp="temp" #privacy_url>
+          <div [ngClass]="getalignment(temp)">
+            <p>
+              <a [href]="data.privacy_url" target="_blank"><b>Privacy Policy</b></a>
+            </p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #return_url>
+          <div [ngClass]="getalignment(temp)">
+            <p>
+              <a [href]="data.return_url" target="_blank"><b>Returns and Refund Policy</b></a>
+            </p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #conditions_url>
+          <div [ngClass]="getalignment(temp)">
+            <p>
+              <a [href]="data.conditions_url" target="_blank"><b>Terms and Conditions</b></a>
+            </p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #conditions_content>
+          <div [ngClass]="getalignment(temp)" *ngIf="data.conditions_content">
+            <div><b>Terms and Conditions</b></div>
+            <p>{{data.conditions_content}}</p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #privacy_content>
+          <div [ngClass]="getalignment(temp)" *ngIf="data.privacy_content">
+            <div><b>Privacy Policy</b></div>
+            <p>{{data.privacy_content}}</p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #return_content>
+          <div class="mt-2 mb-2" [ngClass]="getalignment(temp)" *ngIf="data.return_content">
+            <div><b>Returns and Refund Policy</b></div>
+            <p>{{data.return_content}}</p>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #barcode>
+          <div [ngClass]="getalignment(temp)" *ngIf="vfi.VFI_Barcode">
+            <ngx-barcode [bc-width]="1" [bc-font-size]="14" [bc-height]="50" [bc-value]="data.Receipt_No" [bc-display-value]="true"></ngx-barcode>
+          </div>
+        </ng-template>
+        <ng-template let-temp="temp" #social>
+          <ul [ngClass]="getalignment(temp)" class="font-size-18 list-inline mb-3">
+            <li class="list-inline-item" *ngIf="social_data.facebook">
+              <a [href]="social_data.facebook" target="_blank">
+                <i class="bx bxl-facebook"></i>
+              </a>
+            </li>
+            <li class="list-inline-item" *ngIf="social_data.twitter">
+              <a [href]="social_data.twitter" target="_blank">
+                <i class="bx bxl-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item" *ngIf="social_data.insta">
+              <a [href]="social_data.insta" target="_blank">
+                <i class="bx bxl-instagram"></i>
+              </a>
+            </li>
+            <li class="list-inline-item" *ngIf="social_data.linkedin">
+              <a [href]="social_data.linkedin" target="_blank">
+                <i class="bx bxl-linkedin"></i>
+              </a>
+            </li>
+            <li class="list-inline-item" *ngIf="social_data.youtube">
+              <a [href]="social_data.youtube" target="_blank">
+                <i class="bx bxl-youtube"></i>
+              </a>
+            </li>
+          </ul>
+        </ng-template>
+  

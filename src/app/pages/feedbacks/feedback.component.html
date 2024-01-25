@@ -1,0 +1,54 @@
+<div class="container-fluid">
+
+    <app-page-title title="E-Bills" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+    <div class="row">
+      <div class="col-12">
+        
+        <div class="card">
+          <div class="card-body"><!--nowrap datatables no-footer dtr-inline-->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Search</label>
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="keyword" (keyup)="search()"/>
+                </div>
+              </div>
+             <div class="col-md-4">
+                <div class="form-group">
+                  <label>Locations</label>
+                  <ng-select [(ngModel)]="location_id"  [items]="merchants" bindLabel="name" bindValue="loc_id" 
+                  [multiple]="false" (change)="_fetchData()"></ng-select> 
+                </div>
+              </div>
+             
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered dt-responsive ">
+                <thead>
+                  <tr>
+                    <th sortable="created_at" (sort)="onSort($event)">Date</th>
+                    <th sortable="rating" (sort)="onSort($event)" class="text-center">Rating</th>
+                    <th sortable="title" (sort)="onSort($event)" class="text-center">Reason</th>
+                    <!-- <th sortable="Total" (sort)="onSort($event)" class="text-center">Total</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let merchants of merchantsData ">
+                    <td>{{merchants.created_at |date}}</td>
+                    <td class="text-center">{{merchants.rating}}</td>
+                    <td class="text-center">{{merchants.title}}</td>
+                    <!-- <td class="text-center">{{merchants.Total |currency:'AED ':'code'}}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <app-pagination [page]="pageCopy()" (newItemEvent)="changePage($event)"></app-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+ 
+  

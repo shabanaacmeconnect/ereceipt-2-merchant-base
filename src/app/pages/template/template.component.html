@@ -1,0 +1,145 @@
+<div class="container-fluid">
+
+  <app-page-title title="E-Receipt Template" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <div class="row" style="    margin-top: -59px;">
+    <div class="col-md-12 mb-4">
+      <a  href="javascript: void(0);" (click)="saveData()" class="btn  btn-primary float-end">
+        <i class="bx bx-save me-2"></i>Save Changes
+      </a>
+    </div>
+  </div>
+  
+  <div class="row " cdkDropListGroup>
+    <div class="col-6">
+      <div class="card">
+        <div class=" card-top card-top-primary"  cdkDropList    
+        [cdkDropListData]="todo"     
+        (cdkDropListDropped)="drop($event)" >
+        <div class="card-body ">
+          <div class="card-body-flex" >
+            <div class=" me-auto">
+              <div class="">
+                <h5 class="mb-0 me-2">
+                  <strong>
+                   Selected Template Sections
+                  </strong>
+                </h5>
+                <!-- <span class="text-muted">Choose your template sections from here.</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body ">
+          <div class="card-body-flex" >
+            <div class="d-flex flex-column justify-content-center me-auto">
+              <div class="d-flex flex-row justify-content-center">
+                <!-- <h5 class="mb-0 me-2">
+                  <strong>
+                   Final Template
+                  </strong>
+                </h5> -->
+               
+              </div>
+              
+            </div>
+           
+          </div>
+         
+        
+        <div class="row col-md-12">
+          <div class="card-body"   cdkDrag  *ngFor="let a of todo;let i=index" [ngClass]="a.class=='h'?'col-md-6':'col-md-12'">
+            <div class="" [id]="a.id" *ngIf="a.id"  [ngClass]="a.align=='r'?'text-end':a.align=='c'?'text-center':'text-start'" >
+              <!-- <i class="bx bx-move-vertical  col-md-1"></i> -->
+              <div class="text-muted font-size-15">
+                  {{a.label}}
+                  <span ngbDropdown placement="bottom-start" class="float-end">
+                    <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
+                      aria-expanded="true"></i>
+                    <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                      <a class="dropdown-item" href="javascript: void(0);" (click)="makehalf(i)" ><i class="bx bx-border-start me-2"></i>Half Width</a>
+                      <a class="dropdown-item" href="javascript: void(0);" (click)="makefull(i)"><i class="bx bx-border-end me-2"></i>Full Width</a>
+                      <a class="dropdown-item" href="javascript: void(0);"  (click)="align('l',i)"><i class="bx bx-align-start me-2"></i>Left Align</a>
+                      <a class="dropdown-item" href="javascript: void(0);"  (click)="align('c',i)"><i class="bx bx-align-middle me-2"></i>Center Align</a>
+                      <a class="dropdown-item" href="javascript: void(0);"  (click)="align('r',i)"><i class="bx bx-align-end me-2"></i>Right Align</a>
+                    </div>
+                  </span>                
+              </div>
+            </div>
+            <div class="row " [id]="a.id" *ngIf="a.id==''" [ngClass]="a.align=='r'?'text-end':a.align=='c'?'text-center':'text-start'" >
+  
+              <div *ngIf="!a.editable "  class="col-md-11">
+                <div  class="text-muted" *ngIf="a.bold==1 " >{{a.label}} <button class="ms-3 btn btn-sm text-primary" (click)="onEditClick($event, i)"><i class="fas fa-pencil-alt"></i></button></div>
+                <div  class="text-muted" *ngIf="a.bold==2 " ><strong>{{a.label}}</strong> <button class="ms-3 btn btn-sm text-primary" (click)="onEditClick($event, i)"><i class="fas fa-pencil-alt"></i></button></div>
+                  
+              </div>
+              <input type="text"   class="col-md-11" *ngIf="a.editable==true" [value]="a.label" placeholder="Enter text here..." (focusout)="focusout($event,i)" (keyup)="setValue($event.target.value,i)" class="col-md-11 form-control"/>
+              <span ngbDropdown placement="bottom-start" class="float-end col-md-1">
+                <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
+                  aria-expanded="true"></i>
+                <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                  <a class="dropdown-item" href="javascript: void(0);" (click)="makehalf(i)" ><i class="bx bx-border-start me-2"></i>Half Width</a>
+                  <a class="dropdown-item" href="javascript: void(0);" (click)="makefull(i)"><i class="bx bx-border-end me-2"></i>Full Width</a>
+                  <a class="dropdown-item" href="javascript: void(0);"  (click)="align('l',i)"><i class="bx bx-align-start me-2"></i>Left Align</a>
+                  <a class="dropdown-item" href="javascript: void(0);"  (click)="align('c',i)"><i class="bx bx-align-middle me-2"></i>Center Align</a>
+                  <a class="dropdown-item" href="javascript: void(0);"  (click)="align('r',i)"><i class="bx bx-align-end me-2"></i>Right Align</a>
+                </div>
+              </span> 
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class=" card-top card-top-primary"  cdkDropList
+        [cdkDropListData]="searchlist"
+        (cdkDropListDropped)="drop($event)" >
+        <div class="card-body ">
+          <div class="card-body-flex" >
+            <div class="">
+              <div class="">
+                <h5 class="">
+                  <strong>
+                   Template Section
+                  </strong>
+                </h5>
+                <div class="text-muted mb-2">Choose your template sections from here.</div>
+
+              </div>
+            </div>
+          </div>
+          <div class="search-box py-1">
+            <div class="position-relative">
+              <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search" (keyup)="onSearch()">
+              <i class="bx bx-search-alt search-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-0" >
+          <!-- <div class="text-muted font-size-15">Add Custom Texts</div> -->
+          <a  href="javascript: void(0);" (click)="addText(1)" class="btn btn-primary me-2 ">
+            <i class="bx bx-plus me-2"></i>Add Normat Text
+          </a>
+          <a  href="javascript: void(0);" (click)="addText(2)" class="btn btn-primary">
+            <i class="bx bx-plus me-2"></i>Add Bold Text
+          </a>
+        </div>
+        <div class="card-body"   cdkDrag *ngFor="let a of searchlist">
+          <div class="row" [id]="a.id" *ngIf="a.id">
+            <i class="fas fa-long-arrow-alt-start col-md-1"></i>
+            <div class="text-muted font-size-15  col-md-11">{{a.label}}</div>
+          </div>
+          <div class="dontshow  col-md-11"  [id]="a.id" *ngIf="a.id==''">
+            <div class="text-muted  font-size-15"></div>
+          </div>
+        </div>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+

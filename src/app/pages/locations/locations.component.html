@@ -1,0 +1,102 @@
+<div class="container-fluid">
+
+  <app-page-title title="Locations" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-sm-4">
+              <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                  <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="keyword" (keyup)="search()"/>
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="text-sm-end">
+             
+                <button type="button" class="btn btn-primary btn-rounded mb-2 me-2"  routerLink="add">
+                  <i class="mdi mdi-plus me-1"></i> New locations
+                </button>
+              </div>
+            </div>
+            <!-- end col-->
+          </div>
+          <div class="table-responsive">
+            <table class="table table-centered table-nowrap">
+              <thead>
+                <tr>
+                  <th>Created At</th>
+                  <th>Location ID</th>
+                  <th>Logo</th>
+                  <th>Brand</th>
+                  <th>Store Name</th>
+                  <th>TRN Number</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th class="text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let locations of locationsData">
+                  <td>{{locations.created_at |date:'medium':'+04'}}</td>
+                  <td>{{locations.loc_id}}</td>
+                  <td><img [src]="locations.logo" class="rounded-circle header-profile-user me-2" style="    height: 50px;
+                    width: 50px;
+                    object-fit: cover;"/></td>
+                  <td>{{locations.headline}}</td>
+                  <td>{{locations.name}}</td>
+                  <td>{{locations.TRN_Number}}</td>
+                  <td>{{locations.address}}</td>
+                  <td>{{locations.phone}}</td>
+                  <td><div class="form-check form-switch" dir="ltr">
+                    <input type="checkbox" class="form-check-input float-none" id="customSwitch1" (change)="toggleFunction($event,locations.loc_id)" [checked]="!locations.status" [id]="locations.loc_id">
+                    <label class="custom-control-label" [for]="locations.loc_id"></label>
+                  </div></td>
+                  <!-- <td>
+                    <span class="badge badge-success font-size-12">
+                      <i class="mdi mdi-star me-1"></i>
+                      {{locations.rating}}
+                    </span>
+                  </td> -->
+                  <!-- <td>{{locations.balance}}</td> -->
+                  <td>
+                    <div class="" ngbDropdown placement="bottom-end">
+                      <a href="javascript: void(0);" class="me-2"  routerLink="{{locations.loc_id}}"><i
+                        class="fas fa-pencil-alt text-success me-1"></i>
+                      Edit</a>
+                      <a href="javascript: void(0);" class="me-2" (click)="duplicate(locations.loc_id)"><i
+                        class="bx bx-copy-alt text-primary"></i>
+                        Duplicate
+                      </a>
+                      <a href="javascript: void(0);"  class="me-2"  routerLink="{{locations.loc_id}}/template"><i
+                        class="bx bx-layout  text-primary me-1"></i>
+                      Template</a>
+                     
+                      <a href="javascript: void(0);"  class="me-2" (click)="deleteRow(locations)"><i
+                        class="fas fa-trash-alt text-danger me-1" ></i>
+                      Delete</a>
+                    
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- pagination -->
+          <!-- <ngb-pagination [collectionSize]="elementCount" style="overflow-x:auto;" [(page)]="currentpage" (pageChange)="pageChange()"
+            class="pagination pagination-rounded justify-content-end mb-2" aria-label="Default pagination">
+          </ngb-pagination> -->
+          <app-pagination [page]="pageCopy()" (newItemEvent)="changePage($event)"></app-pagination>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+

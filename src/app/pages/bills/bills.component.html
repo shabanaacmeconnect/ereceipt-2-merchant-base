@@ -1,0 +1,54 @@
+<div class="container-fluid">
+
+    <app-page-title title="E-Bills" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+    <div class="row">
+      <div class="col-12">
+        
+        <div class="card">
+          <div class="card-body"><!--nowrap datatables no-footer dtr-inline-->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Search</label>
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="keyword" (keyup)="search()"/>
+                </div>
+              </div>
+             <div class="col-md-4">
+                <div class="form-group">
+                  <label>Locations</label>
+                  <ng-select [(ngModel)]="merchant_id"  [items]="merchants" bindLabel="name" bindValue="loc_id" 
+                  [multiple]="false" (change)="_fetchData()"></ng-select> 
+                </div>
+              </div>
+             
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered dt-responsive ">
+                <thead>
+                  <tr>
+                    <th sortable="created_At" (sort)="onSort($event)">Date</th>
+                    <th sortable="Tax_Invoice" (sort)="onSort($event)" class="text-center">Invoice Number</th>
+                    <th sortable="name" (sort)="onSort($event)" class="text-center">Location</th>
+                    <th sortable="Total" (sort)="onSort($event)" class="text-center">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let merchants of merchantsData ">
+                    <td role="button" routerLink="/account/bill/{{merchants.ref}}">{{merchants.created_At |date}}</td>
+                    <td role="button" routerLink="/account/bill/{{merchants.ref}}" class="text-center">{{merchants.Tax_Invoice}}</td>
+                    <td role="button" routerLink="/account/bill/{{merchants.ref}}" class="text-center">{{merchants.name}}</td>
+                    <td role="button" routerLink="/account/bill/{{merchants.ref}}" class="text-center">{{merchants.Total |currency:'AED ':'code'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <app-pagination [page]="pageCopy()" (newItemEvent)="changePage($event)"></app-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+ 
+  

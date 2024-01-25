@@ -1,0 +1,173 @@
+<div class="container-fluid">
+    <!-- <div class="row">     
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-18">
+                                        <i class="bx bx-money"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Reciepts Generated</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{dashboardData.receipts |number}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-18">
+                                        <i class="bx bx-message"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">SMS Sent</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{dashboardData.counts[0].messages |number}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-18">
+                                        <i class="bx bxs-inbox"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Email Sent</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{dashboardData.counts[0].emails |number}}</h4>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-18">
+                                        <i class="bx bx-map"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Total Locations</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{dashboardData.locationCount[0]['location'] |number}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-18">
+                                        <i class="bx bx-receipt"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Total Transactions</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{dashboardData.locationCount[0]['transactions'] |number}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <apx-chart class="apex-charts" dir="ltr" [title]="earningLineChart.title"
+                            [responsive]="earningLineChart.responsive" [legend]="earningLineChart.legend"
+                            [markers]="earningLineChart.markers" [series]="earningLineChart.series"
+                                [chart]="earningLineChart.chart" [colors]="earningLineChart.colors" [xaxis]="earningLineChart.xaxis" [yaxis]="earningLineChart.yaxis"
+                                [stroke]="earningLineChart.stroke" [dataLabels]="earningLineChart.dataLabels">
+                            </apx-chart>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Total Transactions per Locations</h4>
+                  
+
+                <div class="table-responsive mt-4">
+                    <table class="table table-centered mb-0">
+                        <tbody>
+                            <tr *ngFor="let data of dashboardData['transactions']">
+                                <td>
+                                    <p class="font-size-14 mb-1">{{data.name}}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0">{{data.count}}</p>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Mode of Payments</h4>
+                  
+
+                <div class="table-responsive mt-4">
+                    <table class="table table-centered mb-0">
+                        <tbody>
+                            <tr ><td><p class="font-size-14 mb-1">Cash</p></td></tr>
+                            <tr ><td><p class="font-size-14 mb-1">Card</p></td></tr>
+                            <tr ><td><p class="font-size-14 mb-1">E-Commerce</p></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Order Types</h4>
+                <div class="table-responsive mt-4">
+                    <table class="table table-centered mb-0">
+                        <tbody>
+                            <tr ><td><p class="font-size-14 mb-1">In-Store</p></td></tr>
+                            <tr ><td><p class="font-size-14 mb-1">Takeaway</p></td></tr>
+                            <tr ><td><p class="font-size-14 mb-1">Delivery</p></td></tr>
+                            <tr ><td><p class="font-size-14 mb-1">E-Commerce</p></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div> <!-- container-fluid -->

@@ -1,0 +1,281 @@
+<div class="h-100 p-1 m-auto page-body" style="max-width: 30rem; margin-end: auto; margin-start: auto;">
+  <div id="billScroll" class="h-100 m-0 scroll-y grey-bg">
+<div id="billScroll" class="h-100 m-0 scroll-y grey-bg animate-box-down">
+    <div class="white-bg p-2">
+<img class="amiation-opacity ng-star-inserted" style="max-width: 11rem; max-height: 5rem;" [src]="data.logo">
+    </div>
+    <div class="card mt-2 gotham-light pt-3 pb-3 animate-box-up" style="font-size: 0.72rem;">
+<div class="row">
+<div class="col-auto text-end" style="width: 2rem; padding-end: 0rem;">
+<i class="mdi mdi-map-marker">
+</i>
+</div>
+<div class="col-auto ps-2" style="width: calc(100% - 2rem);">
+<div>{{data.name}}</div>
+<div>{{data.address}}</div>
+<div class="row">
+<div class="col-auto">TRN: {{data.TRN_Number}} </div>
+<div class="col-auto">
+<span>
+<i class="mdi mdi-phone me-2">
+</i>
+</span>
+<span>{{data.phone}}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card mt-2 p-2 pt-3 pb-3 animate-box-up">
+<div class="gotham-light mb-2" style="font-size: 0.72rem;">{{data.headline}} </div>
+<div class="gotham-medium" style="font-size: 1.15rem;">
+<span>Dear Customer </span>
+</div>
+</div>
+<div class="card mt-2 p-2 pt-3 pb-1 animate-box-up">
+<div class="row gotham-book" style="font-size: 0.72rem;">
+<div class="col-6">Amount Paid</div>
+<div class="col-6 text-end">{{data.created_at |date:'medium'}}</div>
+</div>
+<div class="gotham-medium" style="font-size: 1.15rem;">
+<div class="row">
+<div class="col-6">
+<span>
+<span class="align-text-bottom">{{data.Total}}</span>
+
+</span>
+</div>
+<div class="col-6 text-end">
+<span class="align-text-bottom">Items {{count}} </span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div>
+<div class="container mt-2 mb-2 animate-box-up">
+<span class="gotham-medium">TAX INVOICE فاتورة ضريبية</span>
+<div class="gotham-light"> #{{data.Tax_Invoice}}</div>
+</div>
+<div class="card pt-2 gotham-book animate-box-up">
+<div class="overflow-hidden" style="max-height: 100%;">
+<div class="p-2 border-bottom" style="font-size: 0.85rem;">
+<div>
+  <span *ngFor="let product of productdetails(data.Product_Details); let i=index">
+    <span [ngClass]="(i==0 || (i>0  &&view==2))?'':'view'">
+      <div class="row">
+        <div class="col-1" style="padding-end: 0px;">{{i+1}}.</div>
+        <div class="col-8" style="padding: 0px;">
+        <div> {{product.name_ar}}</div>
+        <div> {{product.name}} </div>
+        </div>
+        <div class="col-3 ps-0 text-end">{{product.quantity*product.amount}}</div>
+        </div>
+        <div class="gotham-light row mt-1" style="font-size: 0.72rem;">
+        <div class="col-1 ps-0">
+        </div>
+        <div class="text-nowrap col-auto ps-0"> Code : <span>
+        </span>{{product.code}} </div>
+        <div class="text-nowrap col-auto ps-0">Quantity : {{product.quantity}} </div>
+        <div class="text-nowrap col-auto ps-0">
+        
+        </div>
+        </div>
+        <div class="gotham-light row mt-1" style="font-size: 0.72rem;">
+        <div class="col-1 ps-0">
+        </div>
+        <div class="text-nowrap col-auto ps-0">{{product.quantity}}&nbsp;x&nbsp;&nbsp;&nbsp;{{product.amount}} </div>
+        </div>
+        <div class="row">
+          <div class="col-1" style="padding-end: 0px;">
+          </div>
+          <div class="col-5" style="padding: 0px;">Net amount</div>
+          <div class="col-6 text-end gotham-medium">{{product.quantity*product.amount}}</div>
+       </div>
+    </span>
+  </span>
+</div>
+</div>
+<div class="p-2 border-bottom" style="font-size: 0.85rem;">
+<div [ngClass]="view==2?'':'view'">
+
+  <div class="">
+    <div class="row" style="font-size: 0.85rem;">
+    <div class="col-1" style="padding-end: 0px;">
+    </div>
+    <div class="col-7" style="padding-start: 0px;">Subtotal (without tax)</div>
+    <div class="col-4 text-end">
+    <span class="gotham-medium">{{data.Sub_Total}}</span>
+    </div>
+    </div>
+    <div>
+    <div class="grey-bg pt-2">
+    <div class="row gotham-medium mt-2" style="font-size: 0.85rem;">
+    <div class="col-1" style="padding-end: 0px;">
+    </div>
+    <div class="col-11" style="padding: 0px;">Tax Summary</div>
+    </div>
+    <div class="row" style="font-size: 0.85rem;">
+    <div class="col-1 pe-0">
+    </div>
+    <div class="col-11 ps-0">
+    <table class="table table-borderless table-sm">
+    <thead>
+    <tr>
+    <th class="ps-0">Tax</th>
+    <th class="text-center">VAT%</th>
+    <th class="text-center">Before VAT</th>
+    <th class="text-center">Incl VAT</th>
+    <th class="text-center">VAT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="ps-0">{{productdetails(data.Tax_Details).tax}}</td>
+    <td class="text-center">{{productdetails(data.Tax_Details).vat_per}} % </td>
+    <td class="text-center">{{productdetails(data.Tax_Details).before_vat}} </td>
+    <td class="text-center">{{productdetails(data.Tax_Details).incl_vat}} </td>
+    <td class="text-center">{{productdetails(data.Tax_Details).vat}}</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    <div class="row" style="font-size: 0.85rem;">
+    <div class="col-8 pt-2">Total Amount Paid</div>
+    <div class="col-4 text-end pt-2">
+    <span class="gotham-medium">{{data.Total}}</span>
+    </div>
+    </div>
+    <div class="row gotham-medium mt-2" style="font-size: 0.85rem;">
+    <div class="col-8 pt-2">Tender</div>
+    </div>
+    <div class="mt-1" style="font-size: 0.85rem;">
+    <div class="row">
+    <div class="col-5" style="padding-end: 0px;">{{data.Card_Scheme}} </div>
+    <div class="col-3 text-center" style="padding-start: 0px;"> {{data.currency}}</div>
+    <div class="col-4 text-end">
+    <span class="gotham-medium">{{data.Total}}</span>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-4 ps-4">Auth</div>
+    <div class="col-8 text-end">{{data.Auth}}</div>
+    </div>
+    <div class="row">
+    <div class="col-4 ps-4">Card No</div>
+    <div class="col-8 text-end">{{data.Card_Number}}</div>
+    </div>
+    <div class="row">
+    <div class="col-4 ps-4">EFT Trans No</div>
+    <div class="col-8 text-end">{{data.EFT_Trans_Number}}</div>
+    </div>
+    </div>
+    <div class="row" style="font-size: 0.85rem;">
+    <div class="col pt-2">
+    </div>
+    </div>
+    <div class="row mt-2" style="font-size: 0.85rem;">
+    <div class="col pt-2">Served By: Cres Lingat Aquino </div>
+    </div>
+    </div>
+    </div>
+</div>
+<div class="text-center pt-2 pointer" *ngIf="view==1 && count>1" (click)="changeview(2)">
+<i class="fas animated bounce fa-angle-down" style="font-size: 0.85rem;">
+</i>
+</div>
+<div class="text-center pt-2 pointer" *ngIf="view==2 && count>1" (click)="changeview(1)">
+  <i class="fas animated bounce fa-angle-up" style="font-size: 0.85rem;">
+  </i>
+  </div>
+</div>
+</div>
+</div>
+<div>
+<div class="card mt-2 p-2 pt-3 pb-3 animate-box-up">
+<div class="gotham-medium">
+<button class="btn btn-block btn-primary p-2">Download Invoice</button>
+</div>
+<div class="text-center m-3 gotham-light">
+<div>- Or Send invoice to your email -</div>
+</div>
+<div>
+  <form [formGroup]="myForm" class="form-inline">
+  <div class="form-group mb-2" style="width: calc(100% - 6rem);">
+  <input type="text"formControlName="email" placeholder="Enter your email address here" class="form-control w-100 ">
+  </div>
+  <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary mb-2 ms-2 gotham-medium" style="width: 5.5rem;">Send</button>
+  </form>
+</div>
+<div>
+
+</div>
+</div>
+</div>
+
+<div>
+<div class="mt-2 animate-box-up">
+
+<!-- <div class="pt-3 ng-star-inserted">
+<app-owl-carousel _nghost-yij-c103="">
+<owl-carousel-o _ngcontent-yij-c103="" _nghost-yij-c101="" class="ng-star-inserted">
+<div _ngcontent-yij-c101="" class="owl-carousel owl-theme owl-loaded owl-responsive owl-drag">
+<div _ngcontent-yij-c101="" class="owl-stage-outer ng-star-inserted">
+<owl-stage _ngcontent-yij-c101="" class="ng-tns-c102-0">
+<div class="ng-tns-c102-0">
+<div class="owl-stage ng-tns-c102-0" style="width: 1975px; transform: translate3d(-750px, 0px, 0px); transition: all 0s ease 0s; padding-start: 50px; padding-end: 50px;">
+<div class="owl-item ng-tns-c102-0 ng-trigger ng-trigger-autoHeight ng-star-inserted cloned" style="width: 365px; margin-end: 10px; height: 0px;">
+<div _ngcontent-yij-c103="" class="amiation-opacity ng-star-inserted" style="">
+<a _ngcontent-yij-c103="" href="https://www.emiratesnbd.com/en/campaign-form/lulu-hypermarket-credit-card/" class="ng-star-inserted">
+<img _ngcontent-yij-c103="" alt="slide_image" src="">
+</a>
+</div>
+</div>
+</div>
+</div>
+</owl-stage>
+</div>
+<div _ngcontent-yij-c101="" class="owl-nav disabled ng-star-inserted">
+<div _ngcontent-yij-c101="" class="owl-prev">
+</div>
+<div _ngcontent-yij-c101="" class="owl-next">
+</div>
+</div>
+<div _ngcontent-yij-c101="" class="owl-dots disabled ng-star-inserted">
+<div _ngcontent-yij-c101="" class="owl-dot active ng-star-inserted">
+<span _ngcontent-yij-c101="">
+</span>
+</div>
+</div>
+</div>
+</owl-carousel-o>
+</app-owl-carousel>
+</div> -->
+<div class="mt-2">
+<button class="btn btn-primary w-100 p-3 gotham-medium">
+<span class="text-white">View your previous transactions with us</span>
+<span>
+<i class="fas float-end fa-angle-end" style="font-size: 1.4rem;">
+</i>
+</span>
+</button>
+</div>
+
+<div class="text-center container gotham-book mt-4 mb-2 animate-box-up" style="font-size: 0.70rem; color: #606060;">
+<div class="mb-1">
+<div>We hope you have enjoyed your shopping</div>
+</div>
+</div>
+<div class="text-center container gotham-book mt-2 mb-4 animate-box-up" style="font-size: 0.70rem; color: #606060;">
+<div>
+<div>Corporate Address</div>
+<div> LuLu Group International Headquarters <br> P.O. Box : 4048 Abu Dhabi UAE </div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>

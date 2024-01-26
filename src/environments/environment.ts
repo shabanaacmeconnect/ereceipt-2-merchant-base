@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  // baseurl:"http://40.123.226.97:8018/",
-  baseurl:"http://localhost:80/",
+  baseurl:"http://40.123.226.97:8018/",
+  // baseurl:"http://localhost:80/",
   production: false,
   defaultauth: 'fackbackend',
   firebaseConfig: {

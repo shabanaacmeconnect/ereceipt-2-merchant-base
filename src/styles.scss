@@ -125,3 +125,6 @@ font-size: 14px;
 ngx-intl-tel-input input[disabled] {
 background-color: #e5eaf1;
 }
+ngb-modal-backdrop{
+  z-index:1040!important
+}

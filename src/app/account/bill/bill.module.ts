@@ -7,7 +7,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIModule } from '../../shared/ui/ui.module';
 import { BillRoutingModule } from './bill-routing';
 import {BillComponent} from './receipt/bill.component';
-import { NgxBarcodeModule } from 'ngx-barcode';
+import { NgxBarcode6Module } from 'ngx-barcode6';
 
 @NgModule({
   declarations: [BillComponent],
@@ -17,7 +17,7 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     NgbAlertModule,
     UIModule,
     BillRoutingModule,
-    NgxBarcodeModule,
+    NgxBarcode6Module,
     FormsModule
   ]
 })

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
-import jwt_decode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { User } from '../models/auth.models';
 import { environment } from 'src/environments/environment';
 import { catchError, retry, map, tap } from 'rxjs/operators';
@@ -79,7 +79,7 @@ export class AuthfakeauthenticationService {
             this.apiStatusHandler.next({show:false});
                 // login successful if there's a jwt token in the response
                 if (res['status']==true) {
-                    let decoded_value:any=jwt_decode(res['data'])
+                    let decoded_value:any=jwtDecode(res['data'])
                     console.log(decoded_value)
                     decoded_value['token']=res['data'];
                     if(res['logo_path']!='')

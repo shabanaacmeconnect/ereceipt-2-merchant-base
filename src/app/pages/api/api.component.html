@@ -26,7 +26,7 @@
                   <label class="col-md-12">{{keys.key_name}}</label>
                  <div class="col-md-11">
                   <div class="input-group " >
-                    <input type="text" class="form-control"  [value]="keys.api_secret" />
+                    <input type="text" class="form-control mb-3"  [value]="keys.api_secret" />
                     <div class="input-group-append">
                       <div class="input-group-text " ngbTooltip="Secret key copied Successfully" triggers="click:blur" style="cursor:pointer" (click)="copyInputMessage(keys.api_secret)">Copy</div>
                     </div>
@@ -41,13 +41,13 @@
                     <div class="form-group">
                       <label>API Key</label>
                       <!-- <div class="input-group"  *ngIf="form1">
-                        <input type="text" class="form-control" [(ngModel)]="api_key" name="api_key1?" #api_key1="ngModel" />
+                        <input type="text" class="form-control mb-3" [(ngModel)]="api_key" name="api_key1?" #api_key1="ngModel" />
                         <div class="input-group-append">
                           <div class="input-group-text " ngbTooltip="Api key copied Successfully" triggers="click:blur" style="cursor:pointer" (click)="copyInputMessage(api_key)">Copy</div>
                         </div>
                       </div> -->
     
-                      <!-- <input *ngIf="form2" type="text" class="form-control" value="*********************************************************************************************************************************************************************************************************************************************************************"/> -->
+                      <!-- <input *ngIf="form2" type="text" class="form-control mb-3" value="*********************************************************************************************************************************************************************************************************************************************************************"/> -->
                      
                     </div>
                     
@@ -84,7 +84,7 @@
             <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
               <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control" formControlName="name"
+                <input type="text" class="form-control mb-3" formControlName="name"
                   [ngClass]="{'is-invalid': typesubmit && type.name.errors}"/>
                 <div *ngIf="typesubmit && type.name.errors" class="invalid-feedback">
                   <span *ngIf="type.name.errors.required"> Name is required.</span>
@@ -96,7 +96,7 @@
               <div class="form-group " *ngIf="api_key">
                 <label>API Key</label>
                 <div class="input-group" >
-                  <input type="text" class="form-control" [value]="api_key" />
+                  <input type="text" class="form-control mb-3" [value]="api_key" />
                   <div class="input-group-append">
                     <div class="input-group-text " ngbTooltip="Api key copied Successfully" triggers="click:blur" style="cursor:pointer" (click)="copyInputMessage(api_key)">Copy</div>
                   </div>
@@ -105,7 +105,7 @@
               <div class="form-group" *ngIf="api_secret">
                 <label>Secret Key</label>
                 <div class="input-group"  >
-                  <input type="text" class="form-control" [value]="api_secret" />
+                  <input type="text" class="form-control mb-3" [value]="api_secret" />
                   <div class="input-group-append">
                     <div class="input-group-text " ngbTooltip="Secret key copied Successfully" triggers="click:blur" style="cursor:pointer" (click)="copyInputMessage(api_secret)">Copy</div>
                   </div>

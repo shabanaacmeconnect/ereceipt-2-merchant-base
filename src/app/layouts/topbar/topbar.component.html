@@ -82,7 +82,7 @@
              
               <div class="form-group">
                 <label>Current Password</label>
-                <input type="text" class="form-control" formControlName="current_password"
+                <input type="text" class="form-control mb-3" formControlName="current_password"
                   [ngClass]="{'is-invalid': typesubmit && type.current_password.errors}"  />
                 <div *ngIf="typesubmit && type.current_password.errors" class="invalid-feedback">
                   <span *ngIf="type.current_password.errors.required">Current Password is required.</span>
@@ -92,7 +92,7 @@
               <div class="form-group">
                 <label>New Password</label>
                 <div>
-                  <input type="password" class="form-control"autocomplete="new-password" maxlength="50" formControlName="new_password"
+                  <input type="password" class="form-control mb-3"autocomplete="new-password" maxlength="50" formControlName="new_password"
                     [ngClass]="{'is-invalid': typesubmit && type.new_password.errors}" />
                   <div *ngIf="typesubmit && type.new_password.errors" class="invalid-feedback">
                     <span *ngIf="type.new_password.errors.required">Password is required.</span>
@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div class="mt-2">
-                  <input type="password" class="form-control" placeholder="Re-Type Password" formControlName="confirm_password"
+                  <input type="password" class="form-control mb-3" placeholder="Re-Type Password" formControlName="confirm_password"
                     [ngClass]="{'is-invalid': typesubmit && type.confirm_password.errors}" />
                   <div *ngIf="typesubmit && type.confirm_password.errors" class="invalid-feedback">
                     <span *ngIf="type.confirm_password.errors.required">This value is required.</span>

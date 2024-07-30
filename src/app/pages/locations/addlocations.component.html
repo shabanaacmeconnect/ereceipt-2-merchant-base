@@ -29,7 +29,7 @@
                 <div class="form-group  col-md-6">
                   <label>Brand Name</label>
                   <div>
-                    <input type="text" class="form-control" formControlName="headline" autocomplete="off" 
+                    <input type="text" class="form-control mb-3" formControlName="headline" autocomplete="off" 
                       [ngClass]="{'is-invalid': typesubmit && type.headline.errors}" />
                     <div *ngIf="typesubmit && type.headline.errors" class="invalid-feedback">
                       <span *ngIf="type.headline.errors.required">Brand Name is required.</span>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Store Name</label>
-                  <input type="text" class="form-control" formControlName="name"
+                  <input type="text" class="form-control mb-3" formControlName="name"
                     [ngClass]="{'is-invalid': typesubmit && type.name.errors}"/>
                   <div *ngIf="typesubmit && type.name.errors" class="invalid-feedback">
                     <span *ngIf="type.name.errors.required"> Name is required.</span>
@@ -64,7 +64,7 @@
                   [separateDialCode]="separateDialCode"
                   formControlName="phone"
                 ></ngx-intl-tel-input>
-                  <!-- <input type="text" class="form-control" formControlName="phone"
+                  <!-- <input type="text" class="form-control mb-3" formControlName="phone"
                     [ngClass]="{'is-invalid': typesubmit && type.phone.errors}"  /> -->
                   <div *ngIf="typesubmit && f.form.controls['phone'].invalid" class="invalid-feedback" style="display:block">
                     <span *ngIf="f.form.controls['phone'].invalid">Require a valid phone number.</span>
@@ -74,7 +74,7 @@
                 
                 <div class="form-group  col-md-6">
                   <label>TRN Number</label>
-                  <input type="text" class="form-control" formControlName="TRN_Number"
+                  <input type="text" class="form-control mb-3" formControlName="TRN_Number"
                     [ngClass]="{'is-invalid': typesubmit && type.TRN_Number.errors}"  />
                   <div *ngIf="typesubmit && type.TRN_Number.errors" class="invalid-feedback">
                     <span *ngIf="type.TRN_Number.errors.required">TRN Number is required.</span>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Address</label>
-                  <textarea type="text" class="form-control" formControlName="address"
+                  <textarea type="text" class="form-control mb-3" formControlName="address"
                     [ngClass]="{'is-invalid': typesubmit && type.address.errors}" ></textarea>
                   <div *ngIf="typesubmit && type.address.errors" class="invalid-feedback">
                     <span *ngIf="type.address.errors.required">Address is required.</span>
@@ -93,7 +93,7 @@
                 <div class="form-group  col-md-6">
                   <label>Logo - Website URL</label>
                   <div>
-                    <input type="text" class="form-control" maxlength="100" formControlName="site" autocomplete="off" 
+                    <input type="text" class="form-control mb-3" maxlength="100" formControlName="site" autocomplete="off" 
                       [ngClass]="{'is-invalid': typesubmit && type.site.errors}" />
                     <div *ngIf="typesubmit && type.site.errors" class="invalid-feedback">
                       <span *ngIf="type.site.errors.required">Website URL is required.</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Privacy Policy - URL</label>
-                  <input type="text" class="form-control" maxlength="100" formControlName="privacy_url"
+                  <input type="text" class="form-control mb-3" maxlength="100" formControlName="privacy_url"
                     [ngClass]="{'is-invalid': typesubmit && type.privacy_url.errors}"  />
                   <div *ngIf="typesubmit && type.privacy_url.errors" class="invalid-feedback">
                     <span *ngIf="type.privacy_url.errors.required">Privacy Policy is required.</span>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Terms and Conditions - URL</label>
-                  <input type="text" class="form-control" maxlength="100" formControlName="conditions_url"
+                  <input type="text" class="form-control mb-3" maxlength="100" formControlName="conditions_url"
                     [ngClass]="{'is-invalid': typesubmit && type.conditions_url.errors}"  />
                   <div *ngIf="typesubmit && type.conditions_url.errors" class="invalid-feedback">
                     <span *ngIf="type.conditions_url.errors.required">Privacy Policy is required.</span>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Privacy Policy - Content</label>
-                  <textarea type="text" class="form-control" maxlength="500" formControlName="privacy_content"
+                  <textarea type="text" class="form-control mb-3" maxlength="500" formControlName="privacy_content"
                     [ngClass]="{'is-invalid': typesubmit && type.privacy_content.errors}" ></textarea>
                   <div *ngIf="typesubmit && type.privacy_content.errors" class="invalid-feedback">
                     <span *ngIf="type.privacy_content.errors.required">Privacy Policy is required.</span>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Terms and Conditions - Content</label>
-                  <textarea type="text" class="form-control" maxlength="500" formControlName="conditions_content"
+                  <textarea type="text" class="form-control mb-3" maxlength="500" formControlName="conditions_content"
                     [ngClass]="{'is-invalid': typesubmit && type.conditions_content.errors}" ></textarea>
                   <div *ngIf="typesubmit && type.conditions_content.errors" class="invalid-feedback">
                     <span *ngIf="type.conditions_content.errors.required">Privacy Policy is required.</span>
@@ -135,14 +135,14 @@
 
                 <div class="form-group  col-md-6">
                   <label>Returns and Refund Policy - URL</label>
-                  <input type="text" class="form-control" maxlength="100" formControlName="return_url"
+                  <input type="text" class="form-control mb-3" maxlength="100" formControlName="return_url"
                     [ngClass]="{'is-invalid': typesubmit && type.return_url.errors}"  />
                   <div *ngIf="typesubmit && type.return_url.errors" class="invalid-feedback">
                   </div>
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Returns and Refund Policy - Content</label>
-                  <textarea type="text" class="form-control" maxlength="500" formControlName="return_content"
+                  <textarea type="text" class="form-control mb-3" maxlength="500" formControlName="return_content"
                     [ngClass]="{'is-invalid': typesubmit && type.return_content.errors}" ></textarea>
                   <div *ngIf="typesubmit && type.return_content.errors" class="invalid-feedback">
                   </div>
@@ -154,7 +154,7 @@
                 <h5 class="card-label col-md-12">Social Media Links</h5>
                 <div class="form-group  col-md-6">
                   <label>Facebook</label>
-                  <input type="text" class="form-control" formControlName="facebook"
+                  <input type="text" class="form-control mb-3" formControlName="facebook"
                     [ngClass]="{'is-invalid': typesubmit && type.facebook.errors}"  />
                   <div *ngIf="typesubmit && type.facebook.errors" class="invalid-feedback">
                    
@@ -162,7 +162,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Instagram</label>
-                  <input type="text" class="form-control" formControlName="insta"
+                  <input type="text" class="form-control mb-3" formControlName="insta"
                     [ngClass]="{'is-invalid': typesubmit && type.insta.errors}"  />
                   <div *ngIf="typesubmit && type.insta.errors" class="invalid-feedback">
                    
@@ -170,7 +170,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Twitter</label>
-                  <input type="text" class="form-control" formControlName="twitter"
+                  <input type="text" class="form-control mb-3" formControlName="twitter"
                     [ngClass]="{'is-invalid': typesubmit && type.twitter.errors}"  />
                   <div *ngIf="typesubmit && type.twitter.errors" class="invalid-feedback">
                    
@@ -178,7 +178,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>Youtube</label>
-                  <input type="text" class="form-control" formControlName="youtube"
+                  <input type="text" class="form-control mb-3" formControlName="youtube"
                     [ngClass]="{'is-invalid': typesubmit && type.youtube.errors}"  />
                   <div *ngIf="typesubmit && type.youtube.errors" class="invalid-feedback">
                    
@@ -186,7 +186,7 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label>LinkedIn</label>
-                  <input type="text" class="form-control" formControlName="linkedin"
+                  <input type="text" class="form-control mb-3" formControlName="linkedin"
                     [ngClass]="{'is-invalid': typesubmit && type.linkedin.errors}"  />
                   <div *ngIf="typesubmit && type.linkedin.errors" class="invalid-feedback">
                    
@@ -200,7 +200,7 @@
 
                 <div class="form-group  col-md-12">
                   <label>Rating headline</label>
-                  <input type="text" class="form-control" formControlName="rating"
+                  <input type="text" class="form-control mb-3" formControlName="rating"
                     [ngClass]="{'is-invalid': typesubmit && type.rating.errors}"  />
                   <div *ngIf="typesubmit && type.rating.errors" class="invalid-feedback">
                    
@@ -212,7 +212,7 @@
                     <div *ngFor="let data1 of formlist.controls; let i=index;">
                       <div [formGroupName]="i" class="row">                        
                         <div class="form-group col-md-11">
-                          <input type="text" class="form-control" formControlName="reason"/>
+                          <input type="text" class="form-control mb-3" formControlName="reason"/>
                           <div *ngIf="typesubmit && formlist.controls[i].get('reason').errors?.required"  class="invalid-feedback">
                             <span *ngIf="formlist.controls[i].get('reason').errors?.required">Reason is required.</span>
                           </div>
@@ -230,7 +230,7 @@
                     <div *ngFor="let data1 of formlist1.controls; let i=index;">
                       <div [formGroupName]="i" class="row">                        
                         <div class="form-group col-md-11">
-                          <input type="text" class="form-control" formControlName="question"/>
+                          <input type="text" class="form-control mb-3" formControlName="question"/>
                           <div *ngIf="typesubmit && formlist1.controls[i].get('question').errors?.required"  class="invalid-feedback">
                             <span *ngIf="formlist1.controls[i].get('question').errors?.required">Question is required.</span>
                           </div>

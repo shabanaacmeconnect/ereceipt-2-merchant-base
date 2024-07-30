@@ -72,7 +72,7 @@
                 <div  class="text-muted" *ngIf="a.bold==2 " ><strong>{{a.label}}</strong> <button class="ms-3 btn btn-sm text-primary" (click)="onEditClick($event, i)"><i class="fas fa-pencil-alt"></i></button></div>
                   
               </div>
-              <input type="text"   class="col-md-11" *ngIf="a.editable==true" [value]="a.label" placeholder="Enter text here..." (focusout)="focusout($event,i)" (keyup)="setValue($event.target.value,i)" class="col-md-11 form-control"/>
+              <input type="text"   class="col-md-11" *ngIf="a.editable==true" [value]="a.label" placeholder="Enter text here..." (focusout)="focusout($event,i)" (keyup)="setValue($event.target.value,i)" class="col-md-11 form-control mb-3"/>
               <span ngbDropdown placement="bottom-start" class="float-end col-md-1">
                 <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
                   aria-expanded="true"></i>
@@ -112,7 +112,7 @@
           </div>
           <div class="search-box py-1">
             <div class="position-relative">
-              <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search" (keyup)="onSearch()">
+              <input type="text" class="form-control mb-3" placeholder="Search..." [(ngModel)]="search" (keyup)="onSearch()">
               <i class="bx bx-search-alt search-icon"></i>
             </div>
           </div>

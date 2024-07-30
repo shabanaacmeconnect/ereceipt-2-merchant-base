@@ -21,11 +21,14 @@
           <div>
             <form (ngSubmit)="typeSubmit()" [formGroup]="myForm" class="form-inline row">
               <div class="form-group" style="width: calc(100% - 6rem);">
-                <input type="text" formControlName="email" placeholder="Please enter your email address here" class="form-control w-100">
+                <input type="text" formControlName="email" placeholder="Please enter your email address here" class="form-control mb-3 w-100">
               </div>
               <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary gotham-medium" style="width: 5.2rem;">Send</button>
             </form>
           </div>
+        </div>
+        <div class="col-md-12 bg-white mb-2 animate-box-up text-center"*ngIf="data.Location_ID==43"> 
+          <img src="assets/images/qrcode.png" width="250px">
         </div>
         <div class="col-md-12 bg-white mb-3 animate-box-up"> 
           <div class="mb-2 text-center">Please Share your valuable feedback with us. </div>
@@ -41,7 +44,7 @@
           </div> 
           <form  class="form-inline row">
             <div class="form-group " style="width: calc(100% - 6rem);">
-              <input type="text" name="feedback" placeholder="Please enter your feedback here." [(ngModel)]="feedback"  class="form-control  ">
+              <input type="text" name="feedback" placeholder="Please enter your feedback here." [(ngModel)]="feedback"  class="form-control mb-3  ">
             </div>
             <button type="submit" [disabled]="feedback==''?true:false" class="btn btn-primary gotham-medium" style="width: 5.2rem;">Send</button>
           </form>

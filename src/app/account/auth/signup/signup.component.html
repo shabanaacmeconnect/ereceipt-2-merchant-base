@@ -42,7 +42,7 @@
                 <div class="form-group mb-3">
                   <label for="username">Username</label>
 
-                  <input type="text" formControlName="username" class="form-control"
+                  <input type="text" formControlName="username" class="form-control mb-3"
                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" id="username" placeholder="Enter username" />
 
                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -53,7 +53,7 @@
                 <div class="form-group mb-3">
                   <label for="email">Email</label>
 
-                  <input type="email" formControlName="email" class="form-control"
+                  <input type="email" formControlName="email" class="form-control mb-3"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="Email" />
 
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label for="password">Password</label>
 
-                  <input type="password" formControlName="password" class="form-control"
+                  <input type="password" formControlName="password" class="form-control mb-3"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="password" placeholder="Password" />
 
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">

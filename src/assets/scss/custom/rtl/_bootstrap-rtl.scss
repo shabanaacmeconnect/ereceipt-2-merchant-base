@@ -423,7 +423,7 @@ dd {
 // .input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
 // .input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
 // .input-group>.custom-select:not(:last-child),
-// .input-group>.form-control:not(:last-child) {
+// .input-group>.form-control mb-3:not(:last-child) {
 //     border-top-right-radius: $input-border-radius;
 //     border-bottom-right-radius: $input-border-radius;
 //     border-top-left-radius: 0;
@@ -453,7 +453,7 @@ dd {
 // .input-group>.input-group-prepend:first-child>.btn:not(:first-child),
 // .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child),
 // .input-group>.custom-select:not(:first-child),
-// .input-group>.form-control:not(:first-child) {
+// .input-group>.form-control mb-3:not(:first-child) {
 //     border-top-left-radius: $input-border-radius;
 //     border-bottom-left-radius: $input-border-radius;
 //     border-top-right-radius: 0;

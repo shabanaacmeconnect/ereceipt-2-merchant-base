@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseurl:"https://magnati-ereceipt-apis.ashysmoke-0e6ea393.uaenorth.azurecontainerapps.io/",
+  baseurl:"http://40.123.226.97:8018/",
   defaultauth: 'fackbackend',
   firebaseConfig: {
     apiKey: '',

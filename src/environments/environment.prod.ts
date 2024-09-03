@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseurl:"http://40.123.226.97:8018/",
+  baseurl:"https://api.eeasy.co/ereceipt-2/",
   defaultauth: 'fackbackend',
   firebaseConfig: {
     apiKey: '',

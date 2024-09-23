@@ -27,8 +27,8 @@
             </form>
           </div>
         </div>
-        <div class="col-md-12 bg-white mb-2 animate-box-up text-center"*ngIf="data.Location_ID==43"> 
-          <img src="assets/images/qrcode.png" width="250px">
+        <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_Zatca_QR"> 
+          <img [src]="vfi.VFI_Zatca_QR" width="250px">
         </div>
         <div class="col-md-12 bg-white mb-3 animate-box-up"> 
           <div class="mb-2 text-center">Please Share your valuable feedback with us. </div>

@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseurl:"https://api.eeasy.co/ereceipt-2/",
+  // baseurl:"https://api.eeasy.co/ereceipt-2/",
+  baseurl:"http://localhost:8018/",
   production: false,
   defaultauth: 'fackbackend',
   firebaseConfig: {

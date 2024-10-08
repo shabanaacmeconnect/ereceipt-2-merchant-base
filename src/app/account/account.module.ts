@@ -11,8 +11,7 @@ import { BillModule } from './bill/bill.module';
     CommonModule,
     AccountRoutingModule,
     AuthModule,
-    BillModule,
-    
+    BillModule
   ]
 })
 export class AccountModule { }

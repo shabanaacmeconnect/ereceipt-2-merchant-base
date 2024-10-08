@@ -8,6 +8,7 @@ import { UIModule } from '../../shared/ui/ui.module';
 import { BillRoutingModule } from './bill-routing';
 import {BillComponent} from './receipt/bill.component';
 import { NgxBarcode6Module } from 'ngx-barcode6';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [BillComponent],
@@ -18,7 +19,8 @@ import { NgxBarcode6Module } from 'ngx-barcode6';
     UIModule,
     BillRoutingModule,
     NgxBarcode6Module,
-    FormsModule
+    FormsModule,
+    QRCodeModule
   ]
 })
 export class BillModule { }

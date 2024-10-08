@@ -28,8 +28,13 @@
           </div>
         </div>
         <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_Zatca_QR"> 
-          <img [src]="vfi.VFI_Zatca_QR" width="250px">
+          <img [src]="vfi.VFI_Zatca_QR" width="250px"/>
         </div>
+
+        <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_ETAX_URL"> 
+          <qrcode [qrdata]="vfi.VFI_ETAX_URL" [width]="250" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+
         <div class="col-md-12 bg-white mb-3 animate-box-up"> 
           <div class="mb-2 text-center">Please Share your valuable feedback with us. </div>
           <div class="gotham-medium">

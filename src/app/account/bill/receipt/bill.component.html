@@ -25,10 +25,10 @@
               </div>
               <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary gotham-medium" style="width: 5.2rem;">Send</button>
             </form>
-          </div>
+          </div> 
         </div>
-        <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_Zatca_QR"> 
-          <img [src]="vfi.VFI_Zatca_QR" width="250px"/>
+        <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_Zatca_Details"> 
+          <img [src]="vfi.VFI_Zatca_Details" width="250px"/>
         </div>
 
         <div class="col-md-12 bg-white mb-2 animate-box-up text-center" *ngIf="vfi.VFI_ETAX_URL"> 
